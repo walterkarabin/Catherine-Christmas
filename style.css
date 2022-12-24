@@ -15,7 +15,7 @@ body {
     overflow-x: hidden;
 }
 
-section{
+section {
     min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
@@ -24,7 +24,7 @@ section{
 }
 
 section:nth-child(1) {
-    background: #1D212B;
+    background: pink;
     color: #fff;
 }
 
@@ -42,7 +42,217 @@ section:nth-child(4) {
     background: #fff;
 }
 
-#myCanvas{
-    top: 0;
+#myCanvas1 {
+    z-index: 2;
+    position: absolute;
+    top: inherit;
     left: 0;
+}
+
+#myCanvas2 {
+    z-index: 1;
+    position: absolute;
+    top: inherit;
+    left: 0;
+}
+
+#Title{
+    position: absolute;
+}
+
+/* Christmas Sleigh */
+
+.sleigh {
+    position: absolute;
+    top: 50%;
+    left: 50vw;
+    /* transform: rotateZ(20deg); */
+}
+
+.chassis {
+    position: relative;
+    /* z-index: 2; */
+    /* background-color: red; */
+    background: linear-gradient(to right, rgb(255, 86, 86) 5px, red 50%, black);
+    width: 200px;
+    height: 100px;
+    border-radius: 25% 10% 20% 50%;
+}
+
+.chassis.seat{
+    position: relative;
+    background: #1D212B;
+    width: 75px;
+    height: 45px;
+    top: 5px;
+    left: 35%;
+    border-radius: 0% 0% 50% 50%;
+    outline: 5px solid white;
+}
+
+.struts.front{
+    /* z-index: 1; */
+    position: absolute;
+    background-color: #1D212B;
+    width: 10px;
+    height: 50px;
+    top: 80%;
+    left: 45;
+    transform: rotateZ(40deg);
+}
+.struts.back{
+    /* z-index: 1; */
+    position: absolute;
+    background-color: #1D212B;
+    width: 10px;
+    height: 50px;
+    top: 80%;
+    left: 75%;
+    transform: rotateZ(-40deg);
+}
+
+.skis{
+    background-color: white;
+    position: absolute;
+    top: 120;
+    left: 25;
+    width: 175px;
+    height: 10px;
+    border-radius: 0% 0% 10% 25%;
+}
+.skis.tips{
+    position: relative;
+    background-color: white;
+    width: 35px;
+    height: 10px;
+    transform: rotateZ(25deg);
+    top: -8;
+    left: -30px;
+    border-radius: 10% 0% 20% 75%;
+}
+
+/* Santa */
+
+.santa{
+    position: absolute;
+    /* background-color: red; */
+    background: linear-gradient(to top, rgb(255, 86, 86) 50%, red 100%);
+    width: 60px;
+    height: 50px;
+    top: 0;
+    left: 40%;
+    border-radius: 0% 0% 50% 50%;
+}
+.santa-body{
+    position: relative;
+    background-color: #1D212B;
+    width: 60px;
+    height: 10px;
+    top: 2%;
+}
+
+.santa-body.santa-button{
+    background-color: #fff;
+    width: 5px;
+    height: 5px;
+    top: 10%;
+    left: 10%;
+    border-radius: 100%;
+}
+.santa-torso{
+    position: relative;
+    background-color: red;
+    width: 60px;
+    height: 50px;
+    top: -120%;
+    border-radius: 20% 20% 0% 0%;
+}
+
+.santa-torso.santa-shoulder{
+    background-color: #1D212B;
+    width: 10px;
+    height: 10px;
+    top: 2%;
+    left: 2%;
+    border-radius: 100%;
+}
+.santa-arm{
+    position: relative;
+    background: linear-gradient(to left, rgb(255, 86, 86) 50%, red 100%);
+    width: 75px;
+    height: 15px;
+    left: 0;
+    border-radius: 10px;
+    transform-origin: 5px;
+    transform: rotateZ(-135deg);
+}
+
+.santa-head{
+    position: relative;
+    width: 60;
+    height: 60;
+    background-color: darksalmon;
+    top: -75;
+    border-radius: 100%;
+}
+
+.santa-beard{
+    position: relative;
+    width: 65px;
+    height: 65px;
+    background-color: white;
+
+    top: 50%;
+    border-radius: 0% 50% 50% 50%;
+    transform: rotate(-135deg);
+}
+
+.hat{
+    position: absolute;
+    width: 60px;
+    height: 15px;
+    background-color: #fff;
+
+    top: 0;
+    border-radius: 10px;
+}
+
+.hat-top{
+    position: relative;
+    width: 50px;
+    height: 60px;
+    background-color: red;
+    bottom: 60;
+    left: 5;
+    border-radius: 200px 0 0 0;
+}
+
+.hat-poof{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+
+    background-color: white;
+    right: -15;
+    border-radius: 0% 50% 50%;
+    transform-origin: 0 0;
+    transform: rotate(-15deg);
+}
+
+.eyel,.eyer{
+    position: absolute;
+    width: 15;
+    height: 15;
+
+    border-top: 5px solid #262626;
+    border-radius: 90px 90px 0 0;
+    top: 15;
+}
+
+.eyel{
+    left: 10;
+}
+
+.eyer{
+    right: 10;
 }

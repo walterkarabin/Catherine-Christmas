@@ -1,17 +1,24 @@
 var heartsList = []; // An array to store the heart objects
 var colors = ['#FF0000', '#FFB6C1', '#FF7F50', '#FFC0CB', '#E6E6FA', '#663399', '#800000'];
-const colorPalette = [
-"#FF0000", // Red
-"#00FF00", // Green
-"#FFD700", // Gold
-"#C0C0C0", // Silver
-"#800020", // Burgundy
-"#008080", // Teal
-"#663399" // Purple
-];
-// var colors = colorPalette;
+// const colorPalette = [
+// "#FF0000", // Red
+// "#00FF00", // Green
+// "#FFD700", // Gold
+// "#C0C0C0", // Silver
+// "#800020", // Burgundy
+// "#008080", // Teal
+// "#663399" // Purple
+// ];
 
-var canvas = document.getElementById('myCanvas');
+const colorPalette = ["#FF66CC", "#FF69B4", "#FF00FF", "#FF1493", "#C71585", "#FFB6C1", "#DB7093", "#F08080", "#FF7F50", "#FA8072", "#FFA07A", "#FF6347", "#FF0000", "#8B0000", "#800000", "#E6E6FA", "#D8BFD8", "#DDA0DD", "#DA70D6", "#EE82EE"];
+
+var colors = colorPalette;
+
+var canvas = document.getElementById('myCanvas1');
+
+var mouseX;
+var mouseY;
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
@@ -19,8 +26,14 @@ function drawHeart(x, y, color) {
     // Get the canvas element and its context
     var ctx = canvas.getContext('2d');
 
-    // Set the fill style to the hearts colour
-    ctx.fillStyle = color;
+    // Enable high-quality antialiasing
+    ctx.imageSmoothingEnabled = true;
+
+    // Set the fill style and globalAlpha based on the heart's y position
+    var alpha = (y / (canvas.height / 2));
+    var colorRGBA = hexToRgba(color, alpha);
+    ctx.fillStyle = colorRGBA;
+
     // Draw a heart shape on the canvas
     ctx.beginPath();
     ctx.moveTo(x + 52.5, y + 28);
@@ -49,45 +62,41 @@ Heart.prototype.draw = function () {
     drawHeart(this.x, this.y, this.color); // Draw the heart at its current position
 }
 
-function update() {
-    // Clear the canvas
-    var canvas = document.getElementById('myCanvas');
-    var ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function generateHeart(x, y) {
+    // Generate a random speed
+    var speed = Math.random() * 1.5 + 0.75;
 
-    // Update and draw the hearts
-    for (var i = 0; i < heartsList.length; i++) {
-        var heart = heartsList[i];
-        heart.move();
-        heart.draw();
-
-        // Remove the heart if it is off screen
-        if (heart.y + 120 < 0) {
-            heartsList.splice(i, 1);
-        }
-    }
-
-    // Request another animation frame
-    requestAnimationFrame(update);
+    // Create a new heart object and add it to the array
+    var heart = new Heart(x, y, speed);
+    heartsList.push(heart);
 }
 
-// Add a new heart every second
+setInterval(function () {
+    var border = 25;
+    if ((mouseX>border && mouseX<(canvas.width-border))
+        &&(mouseY>border && mouseY<(canvas.height-border))) {
+        generateHeart(mouseX-50,mouseY-50);
+        // console.log("On Screen!");
+    }
+}, 500);
+
+// Add a new heart every half second
 setInterval(function () {
     // Generate random x and y coordinates
     var x = Math.random() * canvas.width;
     var y = canvas.height;
 
     // Generate a random speed
-    var speed = Math.random() * 2 + 1;
+    var speed = Math.random() * 1.5 + 0.75;
 
     // Create a new heart object and add it to the array
     var heart = new Heart(x, y, speed);
     heartsList.push(heart);
-}, 1000);
+}, 500);
 
 function drawSantaHat(x, y) {
     // Get the canvas element and its context
-    var canvas = document.getElementById('myCanvas');
+    var canvas = document.getElementById('myCanvas1');
     var ctx = canvas.getContext('2d');
 
     // Set the fill style to red
@@ -110,8 +119,125 @@ function drawSantaHat(x, y) {
     ctx.fill();
 }
 
+function drawSnowflake(x, y) {
+    // Get the canvas element and its context
+    var canvas = document.getElementById('myCanvas1');
+    var ctx = canvas.getContext('2d');
+
+    // Set the stroke style to blue
+    ctx.strokeStyle = '#0000FF';
+
+    // Set the line width
+    ctx.lineWidth = 2;
+
+    // Draw the snowflake
+    ctx.beginPath();
+    ctx.moveTo(x, y - 10);
+    ctx.lineTo(x - 10, y + 10);
+    ctx.lineTo(x + 10, y + 10);
+    ctx.closePath();
+
+    ctx.moveTo(x - 10, y);
+    ctx.lineTo(x + 10, y);
+
+    ctx.moveTo(x, y + 10);
+    ctx.lineTo(x - 10, y - 10);
+    ctx.lineTo(x + 10, y - 10);
+    ctx.closePath();
+
+    // Stroke the snowflake
+    ctx.stroke();
+}
+
+function drawCross(x, y) {
+    // Get the canvas element and its context
+    var canvas = document.getElementById('myCanvas1');
+    var ctx = canvas.getContext('2d');
+
+    // Set the stroke style to black
+    ctx.strokeStyle = '#000000';
+
+    // Set the line width
+    ctx.lineWidth = 2;
+
+    // Draw the cross
+    ctx.beginPath();
+    ctx.moveTo(x - 10, y - 10);
+    ctx.lineTo(x + 10, y + 10);
+    ctx.moveTo(x + 10, y - 10);
+    ctx.lineTo(x - 10, y + 10);
+    ctx.stroke();
+}
+
+function hexToRgba(hex, alpha) {
+    // Remove the # symbol
+    var hexWithoutHash = hex.slice(1);
+
+    // Convert 3-digit hex to 6-digit hex
+    if (hexWithoutHash.length === 3) {
+        hexWithoutHash = hexWithoutHash.split('').map(function (c) {
+            return c + c;
+        }).join('');
+    }
+
+    // Split the hex into its red, green, and blue components
+    var red = parseInt(hexWithoutHash.slice(0, 2), 16);
+    var green = parseInt(hexWithoutHash.slice(2, 4), 16);
+    var blue = parseInt(hexWithoutHash.slice(4, 6), 16);
+
+    // Construct the RGBA value
+    return 'rgba(' + red + ', ' + green + ', ' + blue + ', ' + alpha + ')';
+}
+
+
+// Update function
+function update() {
+    // Clear the canvas
+    var canvas = document.getElementById('myCanvas1');
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Testing mouse drawing
+    // generateHeart(mouseX, mouseY);
+    
+
+    // Update and draw the hearts
+    for (var i = 0; i < heartsList.length; i++) {
+        var heart = heartsList[i];
+        heart.move();
+        // Set the globalAlpha based on the heart's y position
+        if (heart.y < (canvas.height / 2)) {
+            // ctx.globalAlpha = ((heart.y + 250)/ (canvas.height/2));
+            // console.log(heart.y)
+            // console.log(canvas.height)
+        }
+        heart.draw();
+
+        // Remove the heart if it is off screen
+        if (heart.y + 120 < 0) {
+            heartsList.splice(i, 1);
+        }
+    }
+
+    // Request another animation frame
+    requestAnimationFrame(update, 1000, 30);
+}
 
 // Start the animation
 update();
+drawSnowflake(window.innerWidth / 2, 250);
+drawCross(50, 50);
+
+
 
 // drawSantaHat(250, 500);
+
+// Event Listner for mouse drawing
+var timeout;
+// Add an event listener for the mousemove event
+canvas.addEventListener('mousemove', function (event) {
+
+    // Get the mouse positions for events and store them in global variables
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+});
