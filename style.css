@@ -58,6 +58,7 @@ section:nth-child(4) {
 
 #Title{
     position: absolute;
+    font-size: xxx-large;
 }
 
 /* Christmas Sleigh */
@@ -202,7 +203,7 @@ section:nth-child(4) {
     height: 65px;
     background-color: white;
 
-    top: 50%;
+    top: 25px;
     border-radius: 0% 50% 50% 50%;
     transform: rotate(-135deg);
 }
