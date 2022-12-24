@@ -199,7 +199,6 @@ function update() {
 
     // Testing mouse drawing
     // generateHeart(mouseX, mouseY);
-    
 
     // Update and draw the hearts
     for (var i = 0; i < heartsList.length; i++) {
@@ -230,10 +229,9 @@ drawCross(50, 50);
 
 
 
-// drawSantaHat(250, 500);
 
-// Event Listner for mouse drawing
-var timeout;
+
+
 // Add an event listener for the mousemove event
 canvas.addEventListener('mousemove', function (event) {
 

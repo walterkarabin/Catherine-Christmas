@@ -9,6 +9,7 @@ var mosleighVeleft = true;
 var moveRight = false;
 var sleighX = window.innerWidth;
 var beardTop = 50;
+var autoscroll = false;
 const sleigh = document.getElementById('sleigh');
 const santa = document.getElementById('santa');
 const canv = document.querySelector('#myCanvas1');
@@ -117,11 +118,11 @@ function updateSanta() {
     }
     santaWave();
 
-    if (numDirChanges >= 3) {
+    if (numDirChanges >= 3 && autoscroll) {
         endAnimation();
         return;
     }
-    console.log(numDirChanges);
+    // console.log(numDirChanges);
     requestAnimationFrame(updateSanta);
 }
 
