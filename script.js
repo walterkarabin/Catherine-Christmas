@@ -10,7 +10,8 @@ var colors = ['#FF0000', '#FFB6C1', '#FF7F50', '#FFC0CB', '#E6E6FA', '#663399', 
 // "#663399" // Purple
 // ];
 
-const colorPalette = ["#FF66CC", "#FF69B4", "#FF00FF", "#FF1493", "#C71585", "#FFB6C1", "#DB7093", "#F08080", "#FF7F50", "#FA8072", "#FFA07A", "#FF6347", "#FF0000", "#8B0000", "#800000", "#E6E6FA", "#D8BFD8", "#DDA0DD", "#DA70D6", "#EE82EE"];
+// const colorPalette = ["#FF66CC", "#FF69B4", "#FF00FF", "#FF1493", "#C71585", "#FFB6C1", "#DB7093", "#F08080", "#FF7F50", "#FA8072", "#FFA07A", "#FF6347", "#FF0000", "#8B0000", "#800000", "#E6E6FA", "#D8BFD8", "#DDA0DD", "#DA70D6", "#EE82EE"];
+const colorPalette = ["#FF0000", "#FFB6C1", "#FF00FF", "#FF1493", "#C71585", "#FF66CC", "#FF69B4", "#FFB6C1", "#DB7093", "#F08080", "#FF7F50", "#FF6347", "#8B0000", "#E6E6FA", "#D8BFD8", "#DDA0DD", "#DA70D6", "#EE82EE"];
 
 var colors = colorPalette;
 
@@ -239,3 +240,54 @@ canvas.addEventListener('mousemove', function (event) {
     mouseX = event.clientX;
     mouseY = event.clientY;
 });
+
+
+// dynamic text output to elements
+const element = document.querySelector('#line1');
+
+let text = '';
+let index = 0;
+let animating = false;
+const message1 = 'Greetings, my dearest Princess Catherine,';
+const message2 = 'hekkiGreetings, my dearest Princess Catherine,';
+
+function animateText(message) {
+    animating = true;
+    const intervalId = setInterval(() => {
+      text += message[index];
+      if ((message[index] == '<') && (message[index+2] == '>')) {
+        text = text + message[index+1] + message[index+2];
+        index += 2;
+        element.innerHTML = text;
+      }
+      else if ((message[index] == '<') && (message[index+3] == '>')){
+        text = text + message[index+1] + message[index+2] + message[index+3];
+        index += 3;
+        element.innerHTML = text;
+      }
+      else{
+          element.textContent = text;
+      }
+      index++;
+      if (index === message.length) {
+        clearInterval(intervalId);
+        animating = false;
+        // console.log("HERE")
+        // index = 0;
+        // animateText(message2);
+      }
+    }, 200);
+}
+  
+animateText(message1);
+console.log("animating");
+// while (animating) {}
+setTimeout(() => {
+    console.log("Now HERE"); 
+    if (!animating) {
+        text = '';
+        index = 0;
+        animateText(message2);
+        console.log("HERE")
+    }
+}, 2000);

@@ -56,7 +56,7 @@ section:nth-child(4) {
     left: 0;
 }
 
-#Title{
+#Title {
     position: absolute;
     font-size: xxx-large;
 }
@@ -80,7 +80,7 @@ section:nth-child(4) {
     border-radius: 25% 10% 20% 50%;
 }
 
-.chassis.seat{
+.chassis.seat {
     position: relative;
     background: #1D212B;
     width: 75px;
@@ -91,7 +91,7 @@ section:nth-child(4) {
     outline: 5px solid white;
 }
 
-.struts.front{
+.struts.front {
     /* z-index: 1; */
     position: absolute;
     background-color: #1D212B;
@@ -101,7 +101,8 @@ section:nth-child(4) {
     left: 45;
     transform: rotateZ(40deg);
 }
-.struts.back{
+
+.struts.back {
     /* z-index: 1; */
     position: absolute;
     background-color: #1D212B;
@@ -112,7 +113,7 @@ section:nth-child(4) {
     transform: rotateZ(-40deg);
 }
 
-.skis{
+.skis {
     background-color: white;
     position: absolute;
     top: 120;
@@ -121,7 +122,8 @@ section:nth-child(4) {
     height: 10px;
     border-radius: 0% 0% 10% 25%;
 }
-.skis.tips{
+
+.skis.tips {
     position: relative;
     background-color: white;
     width: 35px;
@@ -134,7 +136,7 @@ section:nth-child(4) {
 
 /* Santa */
 
-.santa{
+.santa {
     position: absolute;
     /* background-color: red; */
     background: linear-gradient(to top, rgb(255, 86, 86) 50%, red 100%);
@@ -144,7 +146,8 @@ section:nth-child(4) {
     left: 40%;
     border-radius: 0% 0% 50% 50%;
 }
-.santa-body{
+
+.santa-body {
     position: relative;
     background-color: #1D212B;
     width: 60px;
@@ -152,7 +155,7 @@ section:nth-child(4) {
     top: 2%;
 }
 
-.santa-body.santa-button{
+.santa-body.santa-button {
     background-color: #fff;
     width: 5px;
     height: 5px;
@@ -160,7 +163,8 @@ section:nth-child(4) {
     left: 10%;
     border-radius: 100%;
 }
-.santa-torso{
+
+.santa-torso {
     position: relative;
     background-color: red;
     width: 60px;
@@ -169,7 +173,7 @@ section:nth-child(4) {
     border-radius: 20% 20% 0% 0%;
 }
 
-.santa-torso.santa-shoulder{
+.santa-torso.santa-shoulder {
     background-color: #1D212B;
     width: 10px;
     height: 10px;
@@ -177,7 +181,8 @@ section:nth-child(4) {
     left: 2%;
     border-radius: 100%;
 }
-.santa-arm{
+
+.santa-arm {
     position: relative;
     background: linear-gradient(to left, rgb(255, 86, 86) 50%, red 100%);
     width: 75px;
@@ -188,7 +193,7 @@ section:nth-child(4) {
     transform: rotateZ(-135deg);
 }
 
-.santa-head{
+.santa-head {
     position: relative;
     width: 60;
     height: 60;
@@ -197,7 +202,7 @@ section:nth-child(4) {
     border-radius: 100%;
 }
 
-.santa-beard{
+.santa-beard {
     position: relative;
     width: 65px;
     height: 65px;
@@ -208,7 +213,7 @@ section:nth-child(4) {
     transform: rotate(-135deg);
 }
 
-.hat{
+.hat {
     position: absolute;
     width: 60px;
     height: 15px;
@@ -218,7 +223,7 @@ section:nth-child(4) {
     border-radius: 10px;
 }
 
-.hat-top{
+.hat-top {
     position: relative;
     width: 50px;
     height: 60px;
@@ -228,7 +233,7 @@ section:nth-child(4) {
     border-radius: 200px 0 0 0;
 }
 
-.hat-poof{
+.hat-poof {
     position: absolute;
     width: 15px;
     height: 15px;
@@ -240,7 +245,8 @@ section:nth-child(4) {
     transform: rotate(-15deg);
 }
 
-.eyel,.eyer{
+.eyel,
+.eyer {
     position: absolute;
     width: 15;
     height: 15;
@@ -250,10 +256,10 @@ section:nth-child(4) {
     top: 15;
 }
 
-.eyel{
+.eyel {
     left: 10;
 }
 
-.eyer{
+.eyer {
     right: 10;
 }
