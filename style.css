@@ -15,12 +15,12 @@ body {
     overflow-x: hidden;
 }
 
-span{
+span {
     animation: blinker 1s linear infinite;
 }
 
 @keyframes blinker {
-    50%{
+    50% {
         opacity: 0;
     }
 }
@@ -53,7 +53,7 @@ section:nth-child(4) {
 }
 
 #myCanvas1 {
-    z-index: 2;
+    z-index: 3;
     position: absolute;
     top: inherit;
     left: 0;
@@ -70,9 +70,11 @@ section:nth-child(4) {
 #Title {
     position: absolute;
     font-size: xxx-large;
+    text-align: center;
+    transition: all 2s ease;
 }
 
-.message{
+.message {
     z-index: 2;
     display: flex;
     flex-direction: column;

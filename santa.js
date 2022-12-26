@@ -3,7 +3,7 @@ var hatPoofDegNum = 15;
 var armDegNum = -135;
 var hatDirection = 0.75;
 var armDirection = 0.75;
-var sleighVel = 2; 
+var sleighVel = 3;
 var numDirChanges = 0;
 var mosleighVeleft = true;
 var moveRight = false;
@@ -13,15 +13,16 @@ var autoscroll = true;
 const sleigh = document.getElementById('sleigh');
 const santa = document.getElementById('santa');
 const canv = document.querySelector('#myCanvas1');
+const title = document.getElementById('Title');
 
 // functions for Santa's Sleigh
 function santaHat() {
     const hatPoof = document.getElementById('hatPoof');
-    
-    if(hatPoofDegNum >= 30){
+
+    if (hatPoofDegNum >= 30) {
         hatDirection *= -1;
     }
-    else if(hatPoofDegNum <= 0){
+    else if (hatPoofDegNum <= 0) {
         hatDirection *= -1;
     }
     hatPoofDegNum += hatDirection;
@@ -33,10 +34,10 @@ function santaHat() {
 function santaWave() {
     const arm = document.getElementById('arm');
 
-    if(armDegNum >= -110){
+    if (armDegNum >= -110) {
         armDirection *= -1;
     }
-    else if(armDegNum <= -160){
+    else if (armDegNum <= -160) {
         armDirection *= -1;
     }
     armDegNum += armDirection;
@@ -44,34 +45,27 @@ function santaWave() {
     arm.style.transform = `rotateZ(${armDegNum}deg)`;
 }
 
-function sleighMove(){
+function sleighMove() {
     sleighX -= sleighVel;
     // update position
     sleigh.style.left = `${sleighX}`;
 
     if (sleighX > -300 && mosleighVeleft) {
     }
-    // else if(sleighX > 50 && mosleighVeleft){
-    //     sleighVel = (sleighX/window.innerWidth)*15;
-    // }
-    else if (sleighX <= 50 && mosleighVeleft){
+    else if (sleighX <= 50 && mosleighVeleft) {
         mosleighVeleft = false;
         moveRight = true;
-        sleighVel = -2;
+        sleighVel *= -1;
         sleigh.style.transform = `rotateY(180deg)`;
         numDirChanges++;
     }
 
     else if (sleighX < (window.innerWidth + (100)) && moveRight) {
     }
-    // else if(sleighX < (window.innerWidth + 100) && moveRight){
-    //     sleighVel = -5/Math.log(sleighX); 
-    //     console.log(sleighVel);
-    // }
-    else{
+    else {
         mosleighVeleft = true;
         moveRight = false;
-        sleighVel = 2;
+        sleighVel *= -1;
         sleigh.style.transform = `rotateY(0deg)`;
         numDirChanges++;
     }
@@ -81,27 +75,35 @@ function santaLaugh() {
     const beard = document.getElementById('beard');
     var amplitude = 2;
     const oscillationPeriod = 1;
- 
-    beardTop = amplitude*Math.sin(Date.now() / 100 /oscillationPeriod) + 25;
+
+    beardTop = amplitude * Math.sin(Date.now() / 100 / oscillationPeriod) + 25;
     // console.log(beardTop)
 
     beard.style.top = `${beardTop}px`;
 }
 
+function setTitleColor(pos) {
+    if (sleighX < (window.innerWidth / 2)) {
+        title.style.color = 'red';
+    } else {
+        title.style.color = 'white';
+    }
+}
+
 
 // animation control for Santa
 function updateSanta() {
-    
+
     const period = 1;
-    
+
     var sleighY = 0;
     // console.log(sleigh.style.left);
 
-    
+
     if (sleigh.style.left <= 100) {
         // rotate and change hatDirection
     }
-    else if (sleighX > window.innerWidth){
+    else if (sleighX > window.innerWidth) {
         // rotate and change hatDirection
     }
 
@@ -113,17 +115,19 @@ function updateSanta() {
         santaLaugh();
         // add the hohoho initialization here
     }
-    else{
+    else {
         santaHat();
     }
+    santaWave();
     if (sineValue > 0.5 || sineValue < -0.5) {
-        santaWave();
     }
 
-    if (numDirChanges >= 3 && autoscroll) {
+    if (numDirChanges >= 2 && autoscroll) {
         endAnimation();
-        return;
+        autoscroll = false;
+        // return;
     }
+    setTitleColor(sleighX);
     // console.log(numDirChanges);
     requestAnimationFrame(updateSanta);
 }

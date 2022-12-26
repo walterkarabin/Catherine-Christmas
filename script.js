@@ -77,9 +77,9 @@ function generateHeart(x, y) {
 
 setInterval(function () {
     var border = 25;
-    if ((mouseX>border && mouseX<(canvas.width-border))
-        &&(mouseY>border && mouseY<(canvas.height-border))) {
-        generateHeart(mouseX-50,mouseY-50);
+    if ((mouseX > border && mouseX < (canvas.width - border))
+        && (mouseY > border && mouseY < (canvas.height - border))) {
+        generateHeart(mouseX - 50, mouseY - 50);
         // console.log("On Screen!");
     }
 }, 500);
@@ -247,36 +247,40 @@ canvas.addEventListener('mousemove', function (event) {
 
 // chat GPT optimized code
 // dynamic text output to elements
-const lines = [  'Greetings, my dearest Princess Catherine,',  'You are the kindest, most caring, and most supportive person I know, and I am so grateful to have you by my side. I am filled with gratitude and love for you. You are the light of my life, and I am honored to call you mine.',  'Merry Christmas and lots of love,',  'Walter',];
+const lines = ['Greetings, my dearest Princess Catherine,', 'You are the kindest, most caring, and most supportive person I know, and I am so grateful to have you by my side. I am filled with gratitude and love for you. You are the light of my life, and I am honored to call you mine.', 'Merry Christmas and lots of love,', 'Walter',];
 
 var textPositions = [0, 0, 0, 0];
-var typeSpeed = 100;
+var typeSpeed = 200;
+var textComplete = false;
 
 typeWriter = (i) => {
-  if (i >= lines.length) return;  // exit the function when all lines have been typed out
+    if (i >= lines.length) {
+        textComplete = true;
+        return;  // exit the function when all lines have been typed out
+    }
 
-  const line = lines[i];
+    const line = lines[i];
 
-  document.querySelector(`#line${i + 1}`).innerHTML = line.substring(0, textPositions[i]) + "<span>\u25ae</span>";
+    document.querySelector(`#line${i + 1}`).innerHTML = line.substring(0, textPositions[i]) + "<span>\u25ae</span>";
 
-  if (textPositions[i]++ != line.length) {
-    setTimeout(() => typeWriter(i), typeSpeed);  // call the function again with the same line index
-  } else {
-    setTimeout(() => {
-      document.querySelector(`#line${i + 1}`).innerHTML = line.substring(0, textPositions[i]);
-      typeWriter(i + 1);  // call the function again with the next line index
-    }, 1000);
-  }
+    if (textPositions[i]++ <= line.length) {
+        setTimeout(() => typeWriter(i), typeSpeed);  // call the function again with the same line index
+    } else {
+        setTimeout(() => {
+            document.querySelector(`#line${i + 1}`).innerHTML = lines[i];
+            typeWriter(i + 1);  // call the function again with the next line index
+        }, 1000);
+    }
 }
 
 const messageElement = document.querySelector('#message');
 
 // check if the message element is in view when the window scrolls
 window.addEventListener('scroll', () => {
-  const { top, bottom } = messageElement.getBoundingClientRect();
-  if (top <= window.scrollY && bottom <= window.scrollY) {
-    // the message element is in view, start typing
-    requestAnimationFrame(() => typeWriter(0));  // start the function with the first line
-  }
+    const { top, bottom } = messageElement.getBoundingClientRect();
+    if (top <= window.scrollY && bottom >= window.scrollY && !textComplete) {
+        // the message element is in view, start typing
+        requestAnimationFrame(() => typeWriter(0));  // start the function with the first line
+    }
 });
 
