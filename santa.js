@@ -85,8 +85,10 @@ function santaLaugh() {
 function setTitleColor(pos) {
     if (sleighX < (window.innerWidth / 2)) {
         title.style.color = 'red';
+        title.style.webkitTextFillColor = 'red';
     } else {
         title.style.color = 'white';
+        title.style.webkitTextFillColor = 'white';
     }
 }
 
