@@ -129,7 +129,7 @@ function updateSanta() {
         autoscroll = false;
         // return;
     }
-    setTitleColor(sleighX);
+    // setTitleColor(sleighX);
     // console.log(numDirChanges);
     requestAnimationFrame(updateSanta);
 }
