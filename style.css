@@ -15,6 +15,16 @@ body {
     overflow-x: hidden;
 }
 
+span{
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50%{
+        opacity: 0;
+    }
+}
+
 section {
     min-height: 100vh;
     display: flex;
@@ -51,6 +61,7 @@ section:nth-child(4) {
 
 #myCanvas2 {
     z-index: 1;
+    background: linear-gradient(to bottom, pink, red);
     position: absolute;
     top: inherit;
     left: 0;
@@ -59,6 +70,17 @@ section:nth-child(4) {
 #Title {
     position: absolute;
     font-size: xxx-large;
+}
+
+.message{
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 500px;
+    height: 500px;
 }
 
 /* Christmas Sleigh */

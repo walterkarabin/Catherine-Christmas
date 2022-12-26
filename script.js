@@ -16,12 +16,15 @@ const colorPalette = ["#FF0000", "#FFB6C1", "#FF00FF", "#FF1493", "#C71585", "#F
 var colors = colorPalette;
 
 var canvas = document.getElementById('myCanvas1');
+var canvas2 = document.getElementById('myCanvas2');
 
 var mouseX;
 var mouseY;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+canvas2.width = window.innerWidth;
+canvas2.height = window.innerHeight;
 
 function drawHeart(x, y, color) {
     // Get the canvas element and its context
@@ -225,8 +228,8 @@ function update() {
 
 // Start the animation
 update();
-drawSnowflake(window.innerWidth / 2, 250);
-drawCross(50, 50);
+// drawSnowflake(window.innerWidth / 2, 250);
+// drawCross(50, 50);
 
 
 
@@ -241,53 +244,82 @@ canvas.addEventListener('mousemove', function (event) {
     mouseY = event.clientY;
 });
 
-
+/*
 // dynamic text output to elements
-const element = document.querySelector('#line1');
+const line1 = 'Greetings, my dearest Princess Catherine,';
+const line2 = 'You are the kindest, most caring, and most supportive person I know, and I am so grateful to have you by my side. I am filled with gratitude and love for you. You are the light of my life, and I am honored to call you mine.';
+const line3 = 'Merry Christmas and lots of love,'
+const line4 = 'Walter'
 
-let text = '';
-let index = 0;
-let animating = false;
-const message1 = 'Greetings, my dearest Princess Catherine,';
-const message2 = 'hekkiGreetings, my dearest Princess Catherine,';
+var textPosition1 = 0;
+var textPosition2 = 0;
+var typeSpeed = 200;
+typeWriter = () => {
+    document.querySelector('#line1').innerHTML = line1.substring(0, textPosition1) + "<span>\u25ae</span>";
 
-function animateText(message) {
-    animating = true;
-    const intervalId = setInterval(() => {
-      text += message[index];
-      if ((message[index] == '<') && (message[index+2] == '>')) {
-        text = text + message[index+1] + message[index+2];
-        index += 2;
-        element.innerHTML = text;
-      }
-      else if ((message[index] == '<') && (message[index+3] == '>')){
-        text = text + message[index+1] + message[index+2] + message[index+3];
-        index += 3;
-        element.innerHTML = text;
-      }
-      else{
-          element.textContent = text;
-      }
-      index++;
-      if (index === message.length) {
-        clearInterval(intervalId);
-        animating = false;
-        // console.log("HERE")
-        // index = 0;
-        // animateText(message2);
-      }
-    }, 200);
-}
-  
-animateText(message1);
-console.log("animating");
-// while (animating) {}
-setTimeout(() => {
-    console.log("Now HERE"); 
-    if (!animating) {
-        text = '';
-        index = 0;
-        animateText(message2);
-        console.log("HERE")
+    if (textPosition1++ != line1.length) {
+        setTimeout(typeWriter, typeSpeed);
     }
-}, 2000);
+    else{
+        setTimeout(()=>{
+            document.querySelector('#line1').innerHTML = line1.substring(0, textPosition1);
+
+            setTimeout(typeWriter2, 500);
+        }, 1000);
+    }
+}
+
+typeWriter2 = () => {
+    document.querySelector('#line2').innerHTML = line2.substring(0, textPosition2) + "<span>\u25ae</span>";
+
+    if (textPosition2++ != line2.length) {
+        setTimeout(typeWriter2, typeSpeed);
+    }
+    else{
+        setTimeout(()=>{
+            document.querySelector('#line2').innerHTML = line2.substring(0, textPosition2);
+
+            
+        }, 1000);
+    }
+}
+
+requestAnimationFrame(typeWriter);
+*/
+
+
+// chat GPT optimized code
+// dynamic text output to elements
+const lines = [  'Greetings, my dearest Princess Catherine,',  'You are the kindest, most caring, and most supportive person I know, and I am so grateful to have you by my side. I am filled with gratitude and love for you. You are the light of my life, and I am honored to call you mine.',  'Merry Christmas and lots of love,',  'Walter',];
+
+var textPositions = [0, 0, 0, 0];
+var typeSpeed = 100;
+
+typeWriter = (i) => {
+  if (i >= lines.length) return;  // exit the function when all lines have been typed out
+
+  const line = lines[i];
+
+  document.querySelector(`#line${i + 1}`).innerHTML = line.substring(0, textPositions[i]) + "<span>\u25ae</span>";
+
+  if (textPositions[i]++ != line.length) {
+    setTimeout(() => typeWriter(i), typeSpeed);  // call the function again with the same line index
+  } else {
+    setTimeout(() => {
+      document.querySelector(`#line${i + 1}`).innerHTML = line.substring(0, textPositions[i]);
+      typeWriter(i + 1);  // call the function again with the next line index
+    }, 1000);
+  }
+}
+
+const messageElement = document.querySelector('#message');
+
+// check if the message element is in view when the window scrolls
+window.addEventListener('scroll', () => {
+  const { top, bottom } = messageElement.getBoundingClientRect();
+  if (top <= window.scrollY && bottom <= window.scrollY) {
+    // the message element is in view, start typing
+    requestAnimationFrame(() => typeWriter(0));  // start the function with the first line
+  }
+});
+

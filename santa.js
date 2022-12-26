@@ -116,7 +116,9 @@ function updateSanta() {
     else{
         santaHat();
     }
-    santaWave();
+    if (sineValue > 0.5 || sineValue < -0.5) {
+        santaWave();
+    }
 
     if (numDirChanges >= 3 && autoscroll) {
         endAnimation();
