@@ -244,49 +244,6 @@ canvas.addEventListener('mousemove', function (event) {
     mouseY = event.clientY;
 });
 
-/*
-// dynamic text output to elements
-const line1 = 'Greetings, my dearest Princess Catherine,';
-const line2 = 'You are the kindest, most caring, and most supportive person I know, and I am so grateful to have you by my side. I am filled with gratitude and love for you. You are the light of my life, and I am honored to call you mine.';
-const line3 = 'Merry Christmas and lots of love,'
-const line4 = 'Walter'
-
-var textPosition1 = 0;
-var textPosition2 = 0;
-var typeSpeed = 200;
-typeWriter = () => {
-    document.querySelector('#line1').innerHTML = line1.substring(0, textPosition1) + "<span>\u25ae</span>";
-
-    if (textPosition1++ != line1.length) {
-        setTimeout(typeWriter, typeSpeed);
-    }
-    else{
-        setTimeout(()=>{
-            document.querySelector('#line1').innerHTML = line1.substring(0, textPosition1);
-
-            setTimeout(typeWriter2, 500);
-        }, 1000);
-    }
-}
-
-typeWriter2 = () => {
-    document.querySelector('#line2').innerHTML = line2.substring(0, textPosition2) + "<span>\u25ae</span>";
-
-    if (textPosition2++ != line2.length) {
-        setTimeout(typeWriter2, typeSpeed);
-    }
-    else{
-        setTimeout(()=>{
-            document.querySelector('#line2').innerHTML = line2.substring(0, textPosition2);
-
-            
-        }, 1000);
-    }
-}
-
-requestAnimationFrame(typeWriter);
-*/
-
 
 // chat GPT optimized code
 // dynamic text output to elements
