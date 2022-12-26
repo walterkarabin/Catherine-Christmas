@@ -97,7 +97,7 @@ section:nth-child(4) {
 
 .sleigh {
     position: absolute;
-    top: 50%;
+    top: 75%;
     left: 50vw;
     /* transform: rotateZ(20deg); */
 }
